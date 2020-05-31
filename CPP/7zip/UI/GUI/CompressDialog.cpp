@@ -115,7 +115,8 @@ enum EMethodID
   kBZip2,
   kDeflate,
   kDeflate64,
-  kPPMdZip
+  kPPMdZip,
+  kWzZSTD
 };
 
 static LPCSTR const kMethodsLongnames[] =
@@ -223,7 +224,9 @@ static const EMethodID g_ZipMethods[] =
   kDeflate64,
   kBZip2,
   kLZMA,
-  kPPMdZip
+  kPPMdZip,
+  kZSTD,
+  kWzZSTD
 };
 
 static const EMethodID g_GZipMethods[] =

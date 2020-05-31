@@ -63,7 +63,7 @@ static const char * const kHostOS[] =
   , "OS/X"
 };
 
-
+/* https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT */
 const char * const kMethodNames1[kNumMethodNames1] =
 {
     "Store"
@@ -73,20 +73,28 @@ const char * const kMethodNames1[kNumMethodNames1] =
   , "Reduce3"
   , "Reduce4"
   , "Implode"
-  , NULL // "Tokenize"
+  , NULL        // "Tokenize"
   , "Deflate"
   , "Deflate64"
   , "PKImploding"
   , NULL
   , "BZip2"
   , NULL
-  , "LZMA"
+  , "LZMA"      // 14
+  , NULL        // 15 - Reserved by PKWARE
+  , NULL        // 16 - IBM z/OS CMPSC Compression
+  , NULL        // 17 - Reserved by PKWARE
+  , NULL        // 18 - File is compressed using IBM TERSE
+  , NULL        // 19 - IBM LZ77 z Architecture
+  , "Zstandard" // 20 - Zstandard (zstd) Compression
 };
 
-
+/* https://support.winzip.com/hc/en-us/articles/115011811307-Unsupported-Zip-format */
 const char * const kMethodNames2[kNumMethodNames2] =
 {
-    "xz"
+    "WzZstd"
+  , "MP3"
+  , "xz"
   , "Jpeg"
   , "WavPack"
   , "PPMd"
@@ -1059,6 +1067,8 @@ HRESULT CZipDecoder::Decode(
       lzmaDecoderSpec = new CLzmaDecoder;
       mi.Coder = lzmaDecoderSpec;
     }
+    else if (id == NFileHeader::NCompressionMethod::kZstd)
+      mi.Coder = new NCompress::NZSTD::CComDecoder;
     else if (id == NFileHeader::NCompressionMethod::kXz)
       mi.Coder = new NCompress::NXz::CComDecoder;
     else if (id == NFileHeader::NCompressionMethod::kPPMd)

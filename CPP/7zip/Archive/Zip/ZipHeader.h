@@ -56,7 +56,10 @@ namespace NFileHeader
       
       kTerse = 18,
       kLz77 = 19,
-      
+      kZstd = 20,
+
+      kWzZstd = 93,
+      kMP3 = 94,
       kXz = 95,
       kJpeg = 96,
       kWavPack = 97,
@@ -76,7 +79,8 @@ namespace NFileHeader
     const Byte kExtractVersion_Aes = 51;
     const Byte kExtractVersion_LZMA = 63;
     const Byte kExtractVersion_PPMd = 63;
-    const Byte kExtractVersion_Xz = 20; // test it
+    const Byte kExtractVersion_Xz = 20;
+    const Byte kExtractVersion_Zstd = 20;
   }
 
   namespace NExtraID
