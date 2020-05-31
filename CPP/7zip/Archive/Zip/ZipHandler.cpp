@@ -1069,6 +1069,8 @@ HRESULT CZipDecoder::Decode(
     }
     else if (id == NFileHeader::NCompressionMethod::kZstd)
       mi.Coder = new NCompress::NZSTD::CComDecoder;
+    else if (id == NFileHeader::NCompressionMethod::kWzZstd)
+      mi.Coder = new NCompress::NZSTD::CComDecoder;
     else if (id == NFileHeader::NCompressionMethod::kXz)
       mi.Coder = new NCompress::NXz::CComDecoder;
     else if (id == NFileHeader::NCompressionMethod::kPPMd)
