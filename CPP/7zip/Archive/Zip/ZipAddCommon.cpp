@@ -15,6 +15,7 @@
 #include "../../Common/StreamObjects.h"
 #include "../../Common/StreamUtils.h"
 
+#include "../../Compress/ZstdEncoder.h"
 #include "../../Compress/LzmaEncoder.h"
 #include "../../Compress/PpmdZip.h"
 #include "../../Compress/XzEncoder.h"

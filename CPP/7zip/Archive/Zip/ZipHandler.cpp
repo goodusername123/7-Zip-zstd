@@ -18,6 +18,7 @@
 #include "../../Common/StreamUtils.h"
 
 #include "../../Compress/CopyCoder.h"
+#include "../../Compress/ZstdDecoder.h"
 #include "../../Compress/LzmaDecoder.h"
 #include "../../Compress/ImplodeDecoder.h"
 #include "../../Compress/PpmdZip.h"
@@ -1068,9 +1069,9 @@ HRESULT CZipDecoder::Decode(
       mi.Coder = lzmaDecoderSpec;
     }
     else if (id == NFileHeader::NCompressionMethod::kZstd)
-      mi.Coder = new NCompress::NZSTD::CComDecoder;
+      mi.Coder = new NCompress::NZSTD::CDecoder;
     else if (id == NFileHeader::NCompressionMethod::kWzZstd)
-      mi.Coder = new NCompress::NZSTD::CComDecoder;
+      mi.Coder = new NCompress::NZSTD::CDecoder;
     else if (id == NFileHeader::NCompressionMethod::kXz)
       mi.Coder = new NCompress::NXz::CComDecoder;
     else if (id == NFileHeader::NCompressionMethod::kPPMd)
