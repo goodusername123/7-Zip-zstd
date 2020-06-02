@@ -36,6 +36,7 @@ CEncoder::CEncoder():
   _LdmBucketSizeLog(-1),
   _LdmHashRateLog(-1)
 {
+  _propsize = 5;
   _props.clear();
 }
 
@@ -215,6 +216,11 @@ STDMETHODIMP CEncoder::SetCoderProperties(const PROPID * propIDs, const PROPVARI
 
 STDMETHODIMP CEncoder::WriteCoderProperties(ISequentialOutStream * outStream)
 {
+  /* plain zstd with 0x00 in front of it for zip/zipx */
+  if (_propsize == 1)
+    return WriteStream(outStream, 0x00, 1);
+
+  /* 5 is default by now */
   return WriteStream(outStream, &_props, sizeof (_props));
 }
 
@@ -408,6 +414,12 @@ STDMETHODIMP CEncoder::SetNumberOfThreads(UInt32 numThreads)
   if (numThreads < 1) numThreads = 1;
   if (numThreads > kNumThreadsMax) numThreads = kNumThreadsMax;
   _numThreads = numThreads;
+  return S_OK;
+}
+
+STDMETHODIMP CEncoder::SetPropSize(UInt32 propsize)
+{
+  _propsize = propsize;
   return S_OK;
 }
 

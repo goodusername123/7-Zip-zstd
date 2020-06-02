@@ -39,11 +39,15 @@ STDMETHODIMP CDecoder::SetDecoderProperties2(const Byte * prop, UInt32 size)
 
 #if DEBUG
       printf("prop size =%u\n", size);
+      printf("prop[0]=%08x\n", *prop);
       fflush(stdout);
 #endif
 
   switch (size) {
-  case 3:
+  case 1:
+    memcpy(&_props, pProps, 1);
+    return S_OK;
+   case 3:
     memcpy(&_props, pProps, 3);
     return S_OK;
   case 5:
@@ -114,6 +118,17 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
       zOut.pos = 0;
 
       result = ZSTD_decompressStream(_ctx, &zOut, &zIn);
+
+#if DEBUG
+      printf("result    = %u\n", (unsigned)result);
+      printf("zIn.size  = %u\n", (unsigned)zIn.size);
+      printf("zIn.pos   = %u\n", (unsigned)zIn.pos);
+      printf("zOut.size = %u\n", (unsigned)zOut.size);
+      printf("zOut.pos  = %u\n", (unsigned)zOut.pos);
+      printf("---------------------\n");
+      fflush(stdout);
+#endif
+
       if (ZSTD_isError(result)) {
         switch (ZSTD_getErrorCode(result)) {
           /* @Igor: would be nice, if we have an API to store the errmsg */
@@ -130,16 +145,6 @@ HRESULT CDecoder::CodeSpec(ISequentialInStream * inStream,
             return E_FAIL;
         }
       }
-
-#if DEBUG
-      printf("res       = %u\n", (unsigned)result);
-      printf("zIn.size  = %u\n", (unsigned)zIn.size);
-      printf("zIn.pos   = %u\n", (unsigned)zIn.pos);
-      printf("zOut.size = %u\n", (unsigned)zOut.size);
-      printf("zOut.pos  = %u\n", (unsigned)zOut.pos);
-      printf("---------------------\n");
-      fflush(stdout);
-#endif
 
       /* write decompressed result */
       if (zOut.pos) {

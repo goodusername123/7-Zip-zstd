@@ -363,6 +363,7 @@ HRESULT CAddCommon::Compress(
           {
             _compressExtractVersion = NCompressionMethod::kExtractVersion_Zstd;
             NCompress::NZSTD::CEncoder *encoder = new NCompress::NZSTD::CEncoder();
+            encoder->SetPropSize(1);
             _compressEncoder = encoder;
           }
           else if (method == NCompressionMethod::kXz)

@@ -39,6 +39,7 @@ class CEncoder:
   public CMyUnknownImp
 {
   CProps _props;
+  Int32 _propsize;
 
   ZSTD_CCtx* _ctx;
   void*  _srcBuf;
@@ -78,6 +79,7 @@ public:
   STDMETHOD (SetCoderProperties)(const PROPID *propIDs, const PROPVARIANT *props, UInt32 numProps);
   STDMETHOD (WriteCoderProperties)(ISequentialOutStream *outStream);
   STDMETHOD (SetNumberOfThreads)(UInt32 numThreads);
+  STDMETHOD (SetPropSize)(UInt32 propsize);
 
   CEncoder();
   virtual ~CEncoder();
