@@ -1,6 +1,8 @@
 // (C) 2016 - 2020 Tino Reichardt
 
-#if 0
+#define DEBUG 1
+
+#if DEBUG
 #include <stdio.h>
 #endif
 
@@ -375,7 +377,7 @@ STDMETHODIMP CEncoder::Code(ISequentialInStream *inStream,
         }
       }
 
-#if 0
+#if DEBUG
       printf("err=%u ", (unsigned)err);
       printf("srcSize=%u ", (unsigned)srcSize);
       printf("todo=%u\n", ZSTD_todo);
