@@ -45,6 +45,6 @@ call build-it.cmd
 cd %APPVEYOR_BUILD_FOLDER%
 7z a %APPVEYOR_PROJECT_NAME%-%APPVEYOR_BUILD_VERSION%.7z bin-* *.txt
 
-echo mache nun pause....
-pause
+REM echo mache nun pause....
+REM pause
 
