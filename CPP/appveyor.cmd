@@ -19,26 +19,26 @@ set OPATH=%PATH%
 set ERRFILE=%APPVEYOR_BUILD_FOLDER%\error.txt
 cd %APPVEYOR_BUILD_FOLDER%\CPP
 
-set VC=16.0
-set PATH=%OPATH%
+REM VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\^M
 set SUBSYS=5.01
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
+set PATH=%OPATH%
+call "%VCINSTALLDIR%\Auxiliary\Build\vcvarsall.bat" x86
 call build-it.cmd
 goto end
 
-set PATH=%OPATH%
 set SUBSYS=5.02
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+set PATH=%OPATH%
+call "%VCINSTALLDIR%\Auxiliary\Build\vcvarsall.bat" x64
 call build-it.cmd
 
-set PATH=%OPATH%
 set SUBSYS=6.02
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64_arm
+set PATH=%OPATH%
+call "%VCINSTALLDIR%\Auxiliary\Build\vcvarsall.bat" x64_arm
 call build-it.cmd
 
-set PATH=%OPATH%
 set SUBSYS=6.02
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64_arm64
+set PATH=%OPATH%
+call "%VCINSTALLDIR%\Auxiliary\Build\vcvarsall.bat" x64_arm64
 call build-it.cmd
 
 :end

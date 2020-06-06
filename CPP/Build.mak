@@ -22,7 +22,7 @@ CFLAGS = $(CFLAGS) -D_CONSOLE
 CFLAGS_O1 = $(CFLAGS) /O1
 CFLAGS_O2 = $(CFLAGS) /O2
 
-LFLAGS = $(LFLAGS) /nologo /LTCG /LARGEADDRESSAWARE
+LFLAGS = $(LFLAGS) /LTCG /LARGEADDRESSAWARE
 
 !IFDEF DEF_FILE
 LFLAGS = $(LFLAGS) /DLL /DEF:$(DEF_FILE)
@@ -39,9 +39,9 @@ MY_ML = ml /WX
 !ENDIF
 
 !IF "$(PLATFORM)" == "arm"
-COMPL_ASM = $(MY_ML) $** $O/$(*B).obj
+COMPL_ASM = $(MY_ML) /nologo $** $O/$(*B).obj
 !ELSE
-COMPL_ASM = $(MY_ML) -c /Fo$O/ $**
+COMPL_ASM = $(MY_ML) /nologo -c /Fo$O/ $**
 !ENDIF
 
 COMPL_O1     = $(CC) $(CFLAGS_O1) $**
