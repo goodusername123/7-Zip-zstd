@@ -33,7 +33,7 @@ call build-it.cmd
 
 set SUBSYS=6.02
 set PATH=%OPATH%
-call "%VCINSTALLDIR%Auxiliary\Build\vcvarsall.bat" x64_arm
+call  "%VCINSTALLDIR%Auxiliary\Build\vcvarsall.bat" x64_arm
 call build-it.cmd
 
 set SUBSYS=6.02
