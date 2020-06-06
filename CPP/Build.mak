@@ -39,9 +39,9 @@ MY_ML = ml /WX
 !ENDIF
 
 !IF "$(PLATFORM)" == "arm"
-COMPL_ASM = $(MY_ML) /nologo $** $O/$(*B).obj
+COMPL_ASM = $(MY_ML) $** $O/$(*B).obj
 !ELSE
-COMPL_ASM = $(MY_ML) /nologo -c /Fo$O/ $**
+COMPL_ASM = $(MY_ML) -c /Fo$O/ $**
 !ENDIF
 
 COMPL_O1     = $(CC) $(CFLAGS_O1) $**
