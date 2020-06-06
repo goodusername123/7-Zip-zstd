@@ -3,6 +3,7 @@
 set ROOT=%cd%\7zip
 set OUTDIR=%APPVEYOR_BUILD_FOLDER%\bin-%VC%-%PLATFORM%
 set ERRFILE=%APPVEYOR_BUILD_FOLDER%\bin-%VC%-%PLATFORM%.log
+set CFLAGS=/SUBSYSTEM:WINDOWS,%SUBSYS%
 set LFLAGS=/SUBSYSTEM:WINDOWS,%SUBSYS%
 set > %APPVEYOR_BUILD_FOLDER%\env-%VC%-%PLATFORM%.txt
 mkdir %OUTDIR%
@@ -82,6 +83,7 @@ nmake %OPTS%
 IF %errorlevel% NEQ 0 echo "Error @ Uninstall.exe" >> %ERRFILE%
 copy %PLATFORM%\7zipUninstall.exe %OUTDIR%\Uninstall.exe
 
+set CFLAGS=/SUBSYSTEM:CONSOLE,%SUBSYS%
 set LFLAGS=/SUBSYSTEM:CONSOLE,%SUBSYS%
 cd %ROOT%\UI\Console
 nmake %OPTS%
