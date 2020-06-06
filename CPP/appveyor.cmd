@@ -44,6 +44,7 @@ call build-it.cmd
 :end
 cd %APPVEYOR_BUILD_FOLDER%
 7z a %APPVEYOR_PROJECT_NAME%-%APPVEYOR_BUILD_VERSION%.7z bin-* *.txt
-7z a msv.7z -mx1 "C:\Program Files (x86)\Microsoft Visual Studio" 
-7z a sdk.7z -mx1 "C:\Program Files (x86)\Microsoft SDKs" 
-7z a wdk.7z -mx1 "C:\Program Files (x86)\Windows Kits" 
+
+echo mache nun pause....
+pause
+
