@@ -69,7 +69,7 @@ $O/asm:
 	if not exist "$O/asm" mkdir "$O/asm"
 
 $(PROGPATH): $O $O/asm $(OBJS) $(DEF_FILE)
-	link $(LFLAGS) -out:$(PROGPATH) $(OBJS) $(LIBS)
+	link $(LFLAGS) /nologo -out:$(PROGPATH) $(OBJS) $(LIBS)
 
 !IFNDEF NO_DEFAULT_RES
 $O\resource.res: $(*B).rc
