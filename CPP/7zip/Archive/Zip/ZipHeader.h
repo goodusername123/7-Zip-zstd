@@ -52,15 +52,15 @@ namespace NFileHeader
       
       kBZip2 = 12,
       
-      kLZMA = 14,
+      kLZMA = 14,  // since WinZip 12
       
       kTerse = 18,
       kLz77 = 19,
       kZstd = 20,
 
       kWzZstd = 93,
-      kMP3 = 94,
-      kXz = 95,
+      kMP3 = 94,   // since WinZip 21
+      kXz = 95,    // since WinZip 18
       kJpeg = 96,
       kWavPack = 97,
       kPPMd = 98,
