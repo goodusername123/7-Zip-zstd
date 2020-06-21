@@ -46,25 +46,22 @@ namespace NFileHeader
       kReduce4 = 5,
       kImplode = 6,
       kTokenize = 7,
-      kDeflate = 8,
-      kDeflate64 = 9,
-      kPKImploding = 10,
-      
-      kBZip2 = 12,
-      
-      kLZMA = 14,  // since WinZip 12
-      
-      kTerse = 18,
-      kLz77 = 19,
-      kZstd = 20,
+      kDeflate = 8,      // The file is Deflated
+      kDeflate64 = 9,    // Enhanced Deflating using Deflate64(tm)
+      kPKImploding = 10, // PKWARE Data Compression Library Imploding (old IBM TERSE)
+      kBZip2 = 12,       // File is compressed using BZIP2 algorithm
+      kLZMA = 14,        // LZMA, since WinZip 12
+      kTerse = 18,       // File is compressed using IBM TERSE
+      kLz77 = 19,        // IBM LZ77 z Architecture 
+      kZstd = 20,        // deprecated (use method 93 for zstd)
 
-      kWzZstd = 93,
-      kMP3 = 94,   // since WinZip 21
-      kXz = 95,    // since WinZip 18
-      kJpeg = 96,
-      kWavPack = 97,
-      kPPMd = 98,
-      kWzAES = 99
+      kZstd = 93,        // Zstandard (zstd) Compression
+      kMP3 = 94,         // MP3 Compression - since WinZip 21
+      kXz = 95,          // XZ Compression - since WinZip 18
+      kJpeg = 96,        // JPEG variant
+      kWavPack = 97,     // WavPack compressed data
+      kPPMd = 98,        // PPMd version I, Rev 1
+      kWzAES = 99        // AE-x encryption marker (see APPENDIX E)
     };
 
     const Byte kMadeByProgramVersion = 63;
