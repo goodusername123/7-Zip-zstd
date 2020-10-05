@@ -764,7 +764,7 @@ void CApp::OnCopy(bool move, bool copyToSame, int srcPanelIndex)
       useDestPanel = true;
 
     AddUniqueStringToHeadOfList(copyFolders, destPath);
-    while (copyFolders.Size() > 20)
+    while (copyFolders.Size() > 30)
       copyFolders.DeleteBack();
     SaveCopyHistory(copyFolders);
   }
