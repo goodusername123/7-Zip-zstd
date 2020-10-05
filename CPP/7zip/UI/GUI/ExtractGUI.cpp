@@ -36,6 +36,8 @@ using namespace NDir;
 
 static const wchar_t * const kIncorrectOutDir = L"Incorrect output directory path";
 
+extern bool g_bProcessError;
+
 #ifndef _SFX
 
 static void AddValuePair(UString &s, UINT resourceID, UInt64 value, bool addColon = true)
@@ -169,7 +171,11 @@ HRESULT ExtractGUI(
     CExtractCallbackImp *extractCallback,
     HWND hwndParent)
 {
+  bool openOutputFolder = false;
+  bool deleteSourceFile = false;
+
   messageWasDisplayed = false;
+  g_bProcessError = false;
 
   CThreadExtracting extracter;
   extracter.codecs = codecs;
@@ -222,6 +228,9 @@ HRESULT ExtractGUI(
       options.PathMode = dialog.PathMode;
       options.ElimDup = dialog.ElimDup;
       
+      openOutputFolder = dialog.m_bOpenOutputFolder;
+	  deleteSourceFile = dialog.m_bDeleteSourceFile;
+
       #ifndef _SFX
       // options.NtOptions.AltStreams = dialog.AltStreams;
       options.NtOptions.NtSecurity = dialog.NtSecurity;
@@ -238,7 +247,7 @@ HRESULT ExtractGUI(
     NName::NormalizeDirPathPrefix(options.OutputDir);
     
     /*
-    if (!CreateComplexDirectory(options.OutputDir))
+    if(!CreateComplexDirectory(options.OutputDir))
     {
       UString s = GetUnicodeString(NError::MyFormatMessage(GetLastError()));
       UString s2 = MyFormatNew(IDS_CANNOT_CREATE_FOLDER,
@@ -276,5 +285,34 @@ HRESULT ExtractGUI(
 
   RINOK(extracter.Create(title, hwndParent));
   messageWasDisplayed = extracter.ThreadFinishedOK && extracter.MessagesDisplayed;
+
+  if (extracter.ThreadFinishedOK && !g_bProcessError)
+  {
+	  if (openOutputFolder)
+	  {
+		 StartApplication(options.OutputDir, options.OutputDir);
+	  }
+	  if (deleteSourceFile)
+	  {
+		  DWORD	dwAttr;
+		  UString strFilePath;
+		  for (unsigned i = 0; i < archivePathsFull.Size(); i++)
+		  {
+			  strFilePath = archivePathsFull[i];
+			  dwAttr = GetFileAttributesW(strFilePath);
+
+			  if ((dwAttr != INVALID_FILE_ATTRIBUTES)
+				  && (dwAttr & FILE_ATTRIBUTE_ARCHIVE))
+			  {
+				  if (dwAttr & FILE_ATTRIBUTE_READONLY)
+				  {
+					  dwAttr &= (~FILE_ATTRIBUTE_READONLY);
+					  SetFileAttributesW(strFilePath, dwAttr);
+				  }
+				  ::DeleteFileW(strFilePath);
+			  }
+		  }
+	  }
+  }
   return extracter.Result;
 }
