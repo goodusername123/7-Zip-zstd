@@ -1128,7 +1128,7 @@ bool CProgressDialog::OnExternalCloseMessage()
     {
       if (fm.OkMessage.Title.IsEmpty())
         fm.OkMessage.Title = "7-Zip";
-      MessageBoxW(*this, fm.OkMessage.Message, fm.OkMessage.Title, MB_OK);
+      MessageBoxW(*this, fm.OkMessage.Message, fm.OkMessage.Title, MB_OK | MB_ICONINFORMATION);
     }
   }
 
