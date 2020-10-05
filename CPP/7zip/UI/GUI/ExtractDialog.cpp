@@ -92,7 +92,7 @@ static const UInt32 kLangIDs[] =
 // static const int kWildcardsButtonIndex = 2;
 
 #ifndef NO_REGISTRY
-static const unsigned kHistorySize = 20;
+static const unsigned kHistorySize = 30;
 #endif
 
 #ifndef _SFX
